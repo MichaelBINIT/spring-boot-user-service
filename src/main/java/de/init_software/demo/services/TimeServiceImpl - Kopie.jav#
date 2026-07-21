@@ -1,0 +1,76 @@
+package de.init_software.demo.services;
+
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
+import de.init_software.demo.model.TimeApiResponse;
+import org.springframework.stereotype.Service;
+
+@Service
+public class TimeServiceImpl implements TimeService {
+  @Override
+  public String getCurrentTime(String timeZone){
+
+//    TimeApiResponse response = null;
+//    try {
+//      response = Unirest.get("https://gateway.timeapi.world/timezone/Europe/" + timeZone)
+//              .asObject( TimeApiResponse.class).getBody();
+//      System.out.println(response);
+//    } catch ( UnirestException e ) {
+//      throw new RuntimeException( e );
+//    }
+//
+//    return response.getUtc_datetime();
+
+//    HttpResponse<String> response = null;
+//    try {
+//      response = Unirest.get(
+//                      "https://gateway.timeapi.world/timezone/Europe/Berlin")
+//              .asString();
+//    } catch ( UnirestException e ) {
+//      throw new RuntimeException( e );
+//    }
+//
+//    System.out.println(response.getStatus());
+//    System.out.println(response.getBody());
+//
+//
+
+//    JsonNode json = null;
+//    try {
+//      json = Unirest.get(
+//                      "https://gateway.timeapi.world/timezone/Europe/" + timeZone)
+//              .header("X-RapidAPI-Key", "api_bca52626-27c7-44b7-a935-3a95729992a4")
+//              .asJson()
+//              .getBody();
+//      System.out.println( json );
+//    } catch ( UnirestException e ) {
+//      throw new RuntimeException( e );
+//    }
+//
+//    String utcDateTime =
+//            json.getObject().getString("utc_datetime");
+//
+//    return utcDateTime;
+
+
+
+    JsonNode json = null;
+    try {
+      json = Unirest.get(
+                      "http://api.timezonedb.com/v2.1/get-time-zone?key=VCDZPP50WRMV&format=json&by=zone&zone=Europe/" + timeZone)
+              .asJson()
+              .getBody();
+      System.out.println( json );
+    } catch ( UnirestException e ) {
+      throw new RuntimeException( e );
+    }
+
+    String utcDateTime =
+            json.getObject().getString("formatted");
+
+    return utcDateTime;
+
+  }
+}

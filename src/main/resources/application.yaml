@@ -1,0 +1,14 @@
+spring:
+ application:
+  name: demo
+ datasource:
+  url: jdbc:mysql://localhost:3306/test
+  username: root
+  password: sugar
+
+api:
+ endpoint:  "http://api.timezonedb.com/v2.1/get-time-zone?key=VCDZPP50WRMV&format=json&by=zone&zone="
+ continent: "Europe/"
+
+
+
